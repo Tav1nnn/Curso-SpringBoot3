@@ -1,16 +1,14 @@
 package br.com.otavio.CursoSpringBoot3;
 
-import java.util.concurrent.atomic.AtomicLong;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.UnsupportedMediaTypeStatusException;
+
+import br.com.otavio.CursoSpringBoot3.exceptions.UnsupportedMathOperationException;
 
 @RestController
 public class MathController {
-	
-	private static final String template = "Hello, %s";
-	private static AtomicLong counter = new AtomicLong();
 	
 	@GetMapping("/sum/{numberOne}/{numberTwo}")
 	public Double greeting(
@@ -19,7 +17,7 @@ public class MathController {
 			) throws Exception {
 		
 		if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
-			throw new Exception();
+			throw new UnsupportedMathOperationException("Please set a numeric value!");
 		}
 		
 		return convertToDouble(numberOne) + convertToDouble(numberTwo);
