@@ -11,7 +11,7 @@ import br.com.otavio.CursoSpringBoot3.exceptions.UnsupportedMathOperationExcepti
 public class MathController {
 	
 	@GetMapping("/sum/{numberOne}/{numberTwo}")
-	public Double greeting(
+	public Double sum(
 			@PathVariable("numberOne") String numberOne,
 			@PathVariable("numberTwo") String numberTwo
 			) throws Exception {
@@ -21,6 +21,45 @@ public class MathController {
 		}
 		
 		return convertToDouble(numberOne) + convertToDouble(numberTwo);
+	}
+	
+	@GetMapping("/sub/{numberOne}/{numberTwo}")
+	public Double sub(
+			@PathVariable("numberOne") String numberOne,
+			@PathVariable("numberTwo") String numberTwo
+			) throws Exception {
+		
+		if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
+			throw new UnsupportedMathOperationException("Please set a numeric value!");
+		}
+		
+		return convertToDouble(numberOne) - convertToDouble(numberTwo);
+	}
+	
+	@GetMapping("/mult/{numberOne}/{numberTwo}")
+	public Double mult(
+			@PathVariable("numberOne") String numberOne,
+			@PathVariable("numberTwo") String numberTwo
+			) throws Exception {
+		
+		if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
+			throw new UnsupportedMathOperationException("Please set a numeric value!");
+		}
+		
+		return convertToDouble(numberOne) * convertToDouble(numberTwo);
+	}
+	
+	@GetMapping("/div/{numberOne}/{numberTwo}")
+	public Double div(
+			@PathVariable("numberOne") String numberOne,
+			@PathVariable("numberTwo") String numberTwo
+			) throws Exception {
+		
+		if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
+			throw new UnsupportedMathOperationException("Please set a numeric value!");
+		}
+		
+		return convertToDouble(numberOne) / convertToDouble(numberTwo);
 	}
 
 	private Double convertToDouble(String strNumber) {
