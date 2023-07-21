@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import br.com.otavio.CursoSpringBoot3.exceptions.ResourceNotFoundException;
 import br.com.otavio.CursoSpringBoot3.model.Person;
 import br.com.otavio.CursoSpringBoot3.repositories.PersonRepository;
+import br.com.otavio.CursoSpringBoot3.vo.v1.PersonVO;
 
 @Service
 public class PersonService {
@@ -18,21 +19,21 @@ public class PersonService {
     @Autowired
     private PersonRepository repository;
     
-    public Person findById(Long id) {
+    public PersonVO findById(Long id) {
     	
     	logger.info("Fiding one persin!");
     	
     	return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("id not found"));
     }
     
-    public List<Person> findAll() {
+    public List<PersonVO> findAll() {
     	
     	logger.info("Fiding all persin!");
     	
     	return repository.findAll();
     }
     
-    public Person create(Person person) {
+    public PersonVO create(PersonVO person) {
     	
     	logger.info("Creating one Operson");
     	
@@ -41,7 +42,7 @@ public class PersonService {
     	return person;
     }
     
-    public Person update(Person person) {
+    public PersonVO update(PersonVO person) {
     	logger.info("uptadeting one Operson");
     	
     	var entity = repository.findById(person.getId())
