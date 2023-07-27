@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.otavio.CursoSpringBoot3.exceptions.ResourceNotFoundException;
+import br.com.otavio.CursoSpringBoot3.mapper.DozerMapper;
 import br.com.otavio.CursoSpringBoot3.model.Person;
 import br.com.otavio.CursoSpringBoot3.repositories.PersonRepository;
 import br.com.otavio.CursoSpringBoot3.vo.v1.PersonVO;
@@ -23,23 +24,27 @@ public class PersonService {
     	
     	logger.info("Fiding one persin!");
     	
-    	return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("id not found"));
+    	var entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("id not found"));
+    	
+    	return DozerMapper.parseObject(entity, PersonVO.class);
     }
     
     public List<PersonVO> findAll() {
     	
     	logger.info("Fiding all persin!");
     	
-    	return repository.findAll();
+    	return DozerMapper.parseListObjects(repository.findAll(), PersonVO.class);
     }
     
     public PersonVO create(PersonVO person) {
     	
     	logger.info("Creating one Operson");
     	
-    	person = repository.save(person);
+    	var entitiy = DozerMapper.parseObject(person, Person.class);
     	
-    	return person;
+    	entitiy = repository.save(entitiy);  
+    	
+    	return DozerMapper.parseObject(entitiy, PersonVO.class);
     }
     
     public PersonVO update(PersonVO person) {
@@ -53,7 +58,7 @@ public class PersonService {
     	entity.setAddress(person.getAddress());
     	entity.setGender(person.getGender());
     	
-    	return repository.save(entity);
+    	return DozerMapper.parseObject(repository.save(entity), PersonVO.class);
     }
     
     public void delete(Long id) {
