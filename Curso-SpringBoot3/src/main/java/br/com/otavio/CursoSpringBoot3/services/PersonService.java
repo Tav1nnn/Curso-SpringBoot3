@@ -8,9 +8,11 @@ import org.springframework.stereotype.Service;
 
 import br.com.otavio.CursoSpringBoot3.exceptions.ResourceNotFoundException;
 import br.com.otavio.CursoSpringBoot3.mapper.DozerMapper;
+import br.com.otavio.CursoSpringBoot3.mapper.custom.PersonMapper;
 import br.com.otavio.CursoSpringBoot3.model.Person;
 import br.com.otavio.CursoSpringBoot3.repositories.PersonRepository;
 import br.com.otavio.CursoSpringBoot3.vo.v1.PersonVO;
+import br.com.otavio.CursoSpringBoot3.vo.v2.PersonVO2;
 
 @Service
 public class PersonService {
@@ -19,6 +21,9 @@ public class PersonService {
     
     @Autowired
     private PersonRepository repository;
+    
+    @Autowired
+    private PersonMapper mapper;
     
     public PersonVO findById(Long id) {
     	
@@ -45,6 +50,17 @@ public class PersonService {
     	entitiy = repository.save(entitiy);  
     	
     	return DozerMapper.parseObject(entitiy, PersonVO.class);
+    }
+    
+    public PersonVO2 createV2(PersonVO2 person) {
+    	
+    	logger.info("Creating one Operson");
+    	
+    	var entitiy = mapper.convertVoToEntity(person);
+    	
+    	entitiy = repository.save(entitiy);  
+    	
+    	return mapper.convertEntityToVo(entitiy);
     }
     
     public PersonVO update(PersonVO person) {

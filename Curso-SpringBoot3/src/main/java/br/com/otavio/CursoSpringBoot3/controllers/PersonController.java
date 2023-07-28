@@ -16,9 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.otavio.CursoSpringBoot3.services.PersonService;
 import br.com.otavio.CursoSpringBoot3.vo.v1.PersonVO;
+import br.com.otavio.CursoSpringBoot3.vo.v2.PersonVO2;
 
 @RestController()
-@RequestMapping("/person")
+@RequestMapping("/api/person")
 public class PersonController {
 	
 	@Autowired
@@ -41,6 +42,15 @@ public class PersonController {
 			)
 	public PersonVO creating(@RequestBody PersonVO person) {
 		return service.create(person);
+	}
+	
+	@PostMapping(
+			value = "/v2",
+			consumes = MediaType.APPLICATION_JSON_VALUE,//Consome
+			produces = MediaType.APPLICATION_JSON_VALUE//Produz
+			)
+	public PersonVO2 creatingV2(@RequestBody PersonVO2 person) {
+		return service.createV2(person);
 	}
 	
 	@PutMapping(
