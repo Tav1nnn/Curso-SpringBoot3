@@ -16,12 +16,13 @@ public class PersonVO implements Serializable {
     @JsonProperty("first_name")//nome do campo no json
     private String firstName;
     
-    @JsonProperty("last_name")
+    @JsonProperty("last_name")//nome do campo no json
     private String lastname;
     private String address;
     private String gender;
 
     public PersonVO() {
+    	
     }
 
     public PersonVO(Long id, String firstName, String lastname, String address, String gender) {
