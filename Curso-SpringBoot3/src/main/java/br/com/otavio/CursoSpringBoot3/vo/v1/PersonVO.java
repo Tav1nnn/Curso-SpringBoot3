@@ -3,12 +3,20 @@ package br.com.otavio.CursoSpringBoot3.vo.v1;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonPropertyOrder({"id","firstName","lastname","address","gender"})//ordem do json
 public class PersonVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
     private Long id;
+    
+    @JsonProperty("first_name")//nome do campo no json
     private String firstName;
+    
+    @JsonProperty("last_name")
     private String lastname;
     private String address;
     private String gender;
