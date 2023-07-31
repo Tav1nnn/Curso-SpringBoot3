@@ -34,7 +34,7 @@ public class PersonService {
     	
     	var entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("id not found"));
     	
-    	PersonVO vo = DozerMapper.parseObject(entity, PersonVO.class);
+    	var vo = DozerMapper.parseObject(entity, PersonVO.class);
     	
     	vo.add(linkTo(methodOn(PersonController.class).findById(id)).withSelfRel());
     	
@@ -45,7 +45,11 @@ public class PersonService {
     	
     	logger.info("Fiding all persin!");
     	
-    	return DozerMapper.parseListObjects(repository.findAll(), PersonVO.class);
+    	var persons = DozerMapper.parseListObjects(repository.findAll(), PersonVO.class);
+    	
+    	persons.stream().forEach(p -> p.add(linkTo(methodOn(PersonController.class).findById(p.getKey())).withSelfRel()));
+    	
+    	return persons;
     }
     
     public PersonVO create(PersonVO person) {
@@ -56,7 +60,11 @@ public class PersonService {
     	
     	entitiy = repository.save(entitiy);  
     	
-    	return DozerMapper.parseObject(entitiy, PersonVO.class);
+    	var vo = DozerMapper.parseObject(entitiy, PersonVO.class);
+    	
+    	vo.add(linkTo(methodOn(PersonController.class).findById(vo.getKey())).withSelfRel());
+    	
+    	return vo;
     }
     
     public PersonVO2 createV2(PersonVO2 person) {
@@ -81,7 +89,11 @@ public class PersonService {
     	entity.setAddress(person.getAddress());
     	entity.setGender(person.getGender());
     	
-    	return DozerMapper.parseObject(repository.save(entity), PersonVO.class);
+    	var vo = DozerMapper.parseObject(repository.save(entity), PersonVO.class);
+    	
+    	vo.add(linkTo(methodOn(PersonController.class).findById(vo.getKey())).withSelfRel());
+    	
+    	return vo;
     }
     
     public void delete(Long id) {
