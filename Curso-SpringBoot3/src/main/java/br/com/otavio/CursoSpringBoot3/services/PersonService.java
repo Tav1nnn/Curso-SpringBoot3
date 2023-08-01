@@ -9,6 +9,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import org.springframework.stereotype.Service;
 
 import br.com.otavio.CursoSpringBoot3.controllers.PersonController;
+import br.com.otavio.CursoSpringBoot3.exceptions.RequiredObjetctIsNullException;
 import br.com.otavio.CursoSpringBoot3.exceptions.ResourceNotFoundException;
 import br.com.otavio.CursoSpringBoot3.mapper.DozerMapper;
 import br.com.otavio.CursoSpringBoot3.mapper.custom.PersonMapper;
@@ -54,6 +55,8 @@ public class PersonService {
     
     public PersonVO create(PersonVO person) {
     	
+    	if(person == null) throw new RequiredObjetctIsNullException();
+    	
     	logger.info("Creating one Operson");
     	
     	var entitiy = DozerMapper.parseObject(person, Person.class);
@@ -69,6 +72,8 @@ public class PersonService {
     
     public PersonVO2 createV2(PersonVO2 person) {
     	
+    	if(person == null) throw new RequiredObjetctIsNullException();
+    	
     	logger.info("Creating one Operson");
     	
     	var entitiy = mapper.convertVoToEntity(person);
@@ -79,6 +84,9 @@ public class PersonService {
     }
     
     public PersonVO update(PersonVO person) {
+    	
+    	if(person == null) throw new RequiredObjetctIsNullException();
+    	
     	logger.info("uptadeting one Operson");
     	
     	var entity = repository.findById(person.getKey())

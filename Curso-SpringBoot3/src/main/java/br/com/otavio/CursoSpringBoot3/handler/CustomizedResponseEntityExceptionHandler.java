@@ -11,6 +11,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import br.com.otavio.CursoSpringBoot3.exceptions.ExceptionResponse;
+import br.com.otavio.CursoSpringBoot3.exceptions.RequiredObjetctIsNullException;
 import br.com.otavio.CursoSpringBoot3.exceptions.ResourceNotFoundException;
 
 @ControllerAdvice //quando vai parar todos os controllers
@@ -39,5 +40,17 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 				);
 		
 		return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(RequiredObjetctIsNullException.class)
+	public final ResponseEntity<ExceptionResponse> handleBadRequestExceptions(
+			Exception ex, WebRequest request){
+		ExceptionResponse exceptionResponse = new ExceptionResponse(
+				new Date(),
+				ex.getMessage(), 
+				request.getDescription(false)
+				);
+		
+		return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
 	}
 }
