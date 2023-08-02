@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.when;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -66,7 +66,24 @@ class PersonServiceTest {
 
 	@Test
 	void testFindAll() {
-		fail("Not yet implemented");
+		List<Person> list = input.mockEntityList();
+				
+		when(repository.findAll()).thenReturn(list);
+		
+		var people = service.findAll();
+		var personOne = people.get(1);
+		
+		assertNotNull(people);
+		assertEquals(14, people.size());
+		assertNotNull(personOne);
+		assertNotNull(personOne.getKey());
+		assertNotNull(personOne.getLinks());
+		assertTrue(personOne.toString().contains("links: [</api/person/1>;rel=\"self\"]"));
+		assertEquals("First Name Test1", personOne.getFirstName());
+		assertEquals("Last Name Test1", personOne.getLastname());
+		assertEquals("Addres Test1", personOne.getAddress());
+		assertEquals("F", personOne.getGender());
+		
 	}
 
 	@Test
