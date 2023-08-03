@@ -1,4 +1,4 @@
-package br.com.otavio.CursoSpringBoot3.mapper;
+package br.com.otavio.CursoSpringBoot3.unittests.mockito.dozer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -7,8 +7,9 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import br.com.otavio.CursoSpringBoot3.mapper.mocks.MockPerson;
+import br.com.otavio.CursoSpringBoot3.mapper.DozerMapper;
 import br.com.otavio.CursoSpringBoot3.model.Person;
+import br.com.otavio.CursoSpringBoot3.unittests.mockito.MockPerson;
 import br.com.otavio.CursoSpringBoot3.vo.v1.PersonVO;
 
 public class DozerConverterTest {

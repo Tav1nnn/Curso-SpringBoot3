@@ -1,4 +1,4 @@
-package br.com.otavio.CursoSpringBoot3.mapper.mocks;
+package br.com.otavio.CursoSpringBoot3.unittests.mockito;
 
 import java.util.ArrayList;
 import java.util.List;
