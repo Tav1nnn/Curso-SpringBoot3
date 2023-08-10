@@ -25,7 +25,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController()
 @RequestMapping("/api/book/v1")
-@Tag(name = "People", description = "Endpoints for Managing People")
+@Tag(name = "Book", description = "Endpoints for Managing Book")
 public class BookController {
 	
 	@Autowired
@@ -35,8 +35,8 @@ public class BookController {
 			produces = {MediaType.APPLICATION_JSON,
 					MediaType.APPLICATION_XML,
 					MediaType.APPLICATION_YML})
-	@Operation(summary = "Finds a People", description = "Finds a People",
-	tags = {"People"},
+	@Operation(summary = "Finds a Book", description = "Finds a Book",
+	tags = {"Book"},
 	responses = {
 		@ApiResponse(description = "Success", responseCode = "200", 
 			content = @Content(schema = @Schema(implementation = BookVO.class))),
@@ -53,8 +53,8 @@ public class BookController {
 	@GetMapping(produces = {MediaType.APPLICATION_JSON,
 			MediaType.APPLICATION_XML,
 			MediaType.APPLICATION_YML})
-	@Operation(summary = "Finds all People", description = "Finds all People",
-	tags = {"People"},
+	@Operation(summary = "Finds all Book", description = "Finds all Book",
+	tags = {"Book"},
 	responses = {
 		@ApiResponse(description = "Success", responseCode = "200", 
 			content = {
@@ -77,8 +77,8 @@ public class BookController {
 			produces = {MediaType.APPLICATION_JSON,
 						MediaType.APPLICATION_XML,
 						MediaType.APPLICATION_YML})
-	@Operation(summary = "Adds a People", description = "Adds a People",
-	tags = {"People"},
+	@Operation(summary = "Adds a Book", description = "Adds a Book",
+	tags = {"Book"},
 	responses = {
 		@ApiResponse(description = "Success", responseCode = "200", 
 			content = @Content(schema = @Schema(implementation = BookVO.class))),
@@ -95,8 +95,8 @@ public class BookController {
 			produces = {MediaType.APPLICATION_JSON,
 						MediaType.APPLICATION_XML,
 						MediaType.APPLICATION_YML})
-	@Operation(summary = "Updates a People", description = "Updates  a People",
-	tags = {"People"},
+	@Operation(summary = "Updates a Book", description = "Updates  a Book",
+	tags = {"Book"},
 	responses = {
 		@ApiResponse(description = "Updated", responseCode = "200", 
 			content = @Content(schema = @Schema(implementation = BookVO.class))),
@@ -111,8 +111,8 @@ public class BookController {
 	}
 	
 	@DeleteMapping(value = "/{id}")
-	@Operation(summary = "Deletes a People", description = "Deletes a People",
-	tags = {"People"},
+	@Operation(summary = "Deletes a Book", description = "Deletes a Book",
+	tags = {"Book"},
 	responses = {
 		@ApiResponse(description = "No Content", responseCode = "204", content = @Content),
 		@ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
