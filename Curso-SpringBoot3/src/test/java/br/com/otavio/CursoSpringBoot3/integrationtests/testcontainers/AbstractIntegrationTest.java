@@ -32,6 +32,7 @@ import org.testcontainers.lifecycle.Startables;
 
 		 @SuppressWarnings({"unchecked", "rawtypes"})
 		 @Override
+
 		 public void initialize(ConfigurableApplicationContext applicationContext) {
 			 startContainers();
 			 ConfigurableEnvironment environment = applicationContext.getEnvironment();
