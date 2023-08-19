@@ -31,7 +31,7 @@ public class PersonService {
     
     public PersonVO findById(Long id) {
     	
-    	logger.info("Fiding one persin!");
+    	logger.info("Service: Fiding one persin!");
     	
     	var entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("id not found"));
     	
@@ -44,7 +44,7 @@ public class PersonService {
     
     public List<PersonVO> findAll() {
     	
-    	logger.info("Fiding all persin!");
+    	logger.info("Service: Fiding all persin!");
     	
     	var persons = DozerMapper.parseListObjects(repository.findAll(), PersonVO.class);
     	
@@ -57,7 +57,7 @@ public class PersonService {
     	
     	if(person == null) throw new RequiredObjetctIsNullException();
     	
-    	logger.info("Creating one Operson");
+    	logger.info("Service: Creating one Operson");
     	
     	var entitiy = DozerMapper.parseObject(person, Person.class);
     	
@@ -74,7 +74,7 @@ public class PersonService {
     	
     	if(person == null) throw new RequiredObjetctIsNullException();
     	
-    	logger.info("Creating one Operson");
+    	logger.info("Service: Creating one Operson");
     	
     	var entitiy = mapper.convertVoToEntity(person);
     	
@@ -87,7 +87,7 @@ public class PersonService {
     	
     	if(person == null) throw new RequiredObjetctIsNullException();
     	
-    	logger.info("uptadeting one Operson");
+    	logger.info("Service: Uptadeting one Operson");
     	
     	var entity = repository.findById(person.getKey())
     			.orElseThrow(() -> new ResourceNotFoundException("id not found"));

@@ -1,6 +1,7 @@
 package br.com.otavio.CursoSpringBoot3.controllers;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +26,8 @@ public class PersonController {
 	@Autowired
     private PersonService service;
 
+	private Logger logger = Logger.getLogger(PersonController.class.getName());
+
 	@GetMapping(value = "/{id}",
 			produces = {MediaType.APPLICATION_JSON,
 					MediaType.APPLICATION_XML,
@@ -41,6 +44,7 @@ public class PersonController {
 		@ApiResponse(description = "Internal Error", responseCode = "500", content = @Content)
 	})
 	public PersonVO findById(@PathVariable(value = "id") Long id) {
+		logger.info("Service: Fiding one persin!");
 		return service.findById(id);
 	}
 	
@@ -63,6 +67,7 @@ public class PersonController {
 		@ApiResponse(description = "Internal Error", responseCode = "500", content = @Content)
 	})
 	public List<PersonVO> findAll() {
+		logger.info("Service: Fiding all persin!");
 		return service.findAll();
 	}
 
@@ -81,6 +86,7 @@ public class PersonController {
 					@ApiResponse(description = "Internal Error", responseCode = "500", content = @Content)
 	})
 	public PersonVO creating(@RequestBody PersonVO person) {
+		logger.info("Service: Creating one Operson");
 		return service.create(person);
 	}
 	
@@ -100,6 +106,7 @@ public class PersonController {
 		@ApiResponse(description = "Internal Error", responseCode = "500", content = @Content)
 	})
 	public PersonVO2 creatingV2(@RequestBody PersonVO2 person) {
+		logger.info("Service: Creating one Operson");
 		return service.createV2(person);
 	}
 	
@@ -120,6 +127,7 @@ public class PersonController {
 		@ApiResponse(description = "Internal Error", responseCode = "500", content = @Content)
 	})
 	public PersonVO update(@RequestBody PersonVO person) {
+		logger.info("Service: Uptadeting one Operson");
 		return service.update(person);
 	}
 	
@@ -134,6 +142,7 @@ public class PersonController {
 		@ApiResponse(description = "Internal Error", responseCode = "500", content = @Content)
 	})
 	public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
+		logger.info("Deleting one person");
 		service.delete(id);
 		 
 		return ResponseEntity.noContent().build();

@@ -9,4 +9,7 @@ public class TestsConfigs {
 	public static final String 	CONTENT_TYPE_XML= "application/xml";
 	public static final String 	CONTENT_TYPE_YAML= "application/yaml";
 
+	public static final String 	ORIGIN_OTAVIO = "https://otavio.com.br";
+	public static final String 	ORIGIN_OTAVIO_ERROR = "https://otavioError.com.br";
+
 }
