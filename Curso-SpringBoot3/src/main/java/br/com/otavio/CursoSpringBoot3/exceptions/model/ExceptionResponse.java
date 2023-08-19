@@ -1,4 +1,4 @@
-package br.com.otavio.CursoSpringBoot3.exceptions;
+package br.com.otavio.CursoSpringBoot3.exceptions.model;
 
 import java.io.Serializable;
 import java.util.Date;
