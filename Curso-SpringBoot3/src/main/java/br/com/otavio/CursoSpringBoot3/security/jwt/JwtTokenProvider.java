@@ -1,4 +1,4 @@
-package br.com.otavio.CursoSpringBoot3.securityJwt;
+package br.com.otavio.CursoSpringBoot3.security.jwt;
 
 import br.com.otavio.CursoSpringBoot3.exceptions.InvalidJwtAthenticationException;
 import br.com.otavio.CursoSpringBoot3.vo.v1.TokenVO;
@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.annotation.PostConstruct;
-import javax.xml.crypto.Data;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
@@ -25,10 +24,10 @@ import java.util.List;
 @Service
 public class JwtTokenProvider {
 
-    @Value("${security.jwt.token.secret-key:default}")
+    @Value("${security.jwt.token.secret-key:secret}")
     private String secretKey = "Secret";
 
-    @Value("${security.jwt.token.secret-key:secret}")
+    @Value("${security.jwt.token.expire-length:3600000}")
     private long validityInMilliseconds = 3600000; // uma hora
 
     @Autowired
