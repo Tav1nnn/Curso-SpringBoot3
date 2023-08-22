@@ -28,6 +28,10 @@ public class SecurityConfig {
     @Autowired
     private JwtTokenProvider tokenProvider;
 
+    public SecurityConfig(JwtTokenProvider tokenProvider) {
+        this.tokenProvider = tokenProvider;
+    }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         Map<String, PasswordEncoder> encoderMap = new HashMap<>();
@@ -53,18 +57,20 @@ public class SecurityConfig {
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
         return http
                 .httpBasic().disable()
                 .csrf(AbstractHttpConfigurer::disable)
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .sessionManagement(
+                        session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(
                         authorizeHttpRequests -> authorizeHttpRequests
-                                .requestMatchers("/auth/**",
-                                        "swagger-ui/**",
-                                        "v3-api-docs/**")
-                                .permitAll()
-                                .requestMatchers("api/v1/**").authenticated()
+                                .requestMatchers(
+                                        "/auth/signin",
+                                        "/auth/refresh/**",
+                                        "/swagger-ui/**",
+                                        "/v3/api-docs/**"
+                                ).permitAll()
+                                .requestMatchers("/api/**").authenticated()
                                 .requestMatchers("/users").denyAll()
                 )
                 .cors()

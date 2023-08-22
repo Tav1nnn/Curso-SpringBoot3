@@ -15,8 +15,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthService {
 
+
+
     @Autowired
     private JwtTokenProvider tokenProvider;
+
+    public AuthService(JwtTokenProvider tokenProvider) {
+        this.tokenProvider = tokenProvider;
+    }
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -44,7 +50,7 @@ public class AuthService {
 
             return ResponseEntity.ok(tokenResponse);
         }catch (Exception e) {
-            throw new BadCredentialsException("Invalid username/password supplied!")
+            throw new BadCredentialsException("Invalid username/password supplied!");
         }
     }
 }

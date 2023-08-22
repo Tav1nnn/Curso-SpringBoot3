@@ -16,6 +16,7 @@ public class JwtConfigurer extends SecurityConfigurerAdapter<DefaultSecurityFilt
     private JwtTokenProvider tokenProvider;
 
     public JwtConfigurer(JwtTokenProvider tokenProvider) {
+        this.tokenProvider =tokenProvider;
     }
 
     @Override

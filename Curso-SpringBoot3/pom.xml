@@ -40,8 +40,16 @@
 			<groupId>org.springframework.hateoas</groupId>
 			<artifactId>spring-hateoas</artifactId>
 		</dependency>
-		
-	    <dependency>
+
+		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.1</version>
+		</dependency>
+
+
+		<dependency>
 	      <groupId>com.mysql</groupId>
 	      <artifactId>mysql-connector-j</artifactId>
 	      <scope>runtime</scope>
