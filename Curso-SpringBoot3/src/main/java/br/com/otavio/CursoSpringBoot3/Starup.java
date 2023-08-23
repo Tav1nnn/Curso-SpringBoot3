@@ -14,6 +14,8 @@ public class Starup {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Starup.class, args);
+
+
 	}
 
 }

@@ -1,4 +1,4 @@
-package br.com.otavio.CursoSpringBoot3.vo.v1;
+package br.com.otavio.CursoSpringBoot3.security;
 
 import java.io.Serial;
 import java.io.Serializable;

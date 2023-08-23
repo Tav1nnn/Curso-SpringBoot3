@@ -1,8 +1,8 @@
 package br.com.otavio.CursoSpringBoot3.services;
 
 import br.com.otavio.CursoSpringBoot3.repositories.UserRepository;
+import br.com.otavio.CursoSpringBoot3.security.AccountCredentialsVO;
 import br.com.otavio.CursoSpringBoot3.security.jwt.JwtTokenProvider;
-import br.com.otavio.CursoSpringBoot3.vo.v1.AccountCredentialsVO;
 import br.com.otavio.CursoSpringBoot3.vo.v1.TokenVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,11 +30,14 @@ public class AuthService {
     @Autowired
     private UserRepository repository;
 
+    @SuppressWarnings("rawtypes")
     public ResponseEntity signin(AccountCredentialsVO data) {
 
         try {
             var username = data.getUsername();
             var password = data.getPassword();
+
+            System.out.println("senha "+ data.getPassword());
 
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
 
@@ -52,5 +55,22 @@ public class AuthService {
         }catch (Exception e) {
             throw new BadCredentialsException("Invalid username/password supplied!");
         }
+    }
+
+    @SuppressWarnings("rawtypes")
+    public ResponseEntity refreshToken(String username, String refreshToken) {
+
+        var user = repository.findByUserName(username);
+
+        var tokenResponse = new TokenVO();
+
+        if (user != null) {
+             tokenResponse = tokenProvider.refreshToken(refreshToken);
+        }else {
+             throw new UsernameNotFoundException("Username " + username + " not found!");
+        }
+
+        return ResponseEntity.ok(tokenResponse);
+
     }
 }
