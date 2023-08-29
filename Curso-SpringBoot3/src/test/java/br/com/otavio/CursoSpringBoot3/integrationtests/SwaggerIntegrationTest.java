@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import br.com.otavio.CursoSpringBoot3.configs.TestsConfigs;
+import br.com.otavio.CursoSpringBoot3.configs.TestConfigs;
 import br.com.otavio.CursoSpringBoot3.integrationtests.testcontainers.AbstractIntegrationTest;
 import io.restassured.RestAssured;
 
@@ -16,7 +16,7 @@ public class SwaggerIntegrationTest extends AbstractIntegrationTest{
 	public void shouldDisplaySwaggerUiPage() {
 		var content = RestAssured.given()
 			.basePath("/swagger-ui/index.html")
-			.port(TestsConfigs.SERVER_PORT)
+			.port(TestConfigs.SERVER_PORT)
 			.when()
 				.get()//for metodo get
 			.then()//espero

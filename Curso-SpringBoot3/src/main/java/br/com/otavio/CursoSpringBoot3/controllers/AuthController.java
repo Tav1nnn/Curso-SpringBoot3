@@ -32,7 +32,7 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid Credentials");
         }
 
-        return token;
+        return ResponseEntity.ok().body(token);
     }
 
     @SuppressWarnings("rawtypes")
