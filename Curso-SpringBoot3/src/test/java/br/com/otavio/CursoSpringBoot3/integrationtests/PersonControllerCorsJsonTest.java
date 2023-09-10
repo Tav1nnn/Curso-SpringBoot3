@@ -58,11 +58,12 @@ public class PersonControllerCorsJsonTest extends AbstractIntegrationTest {
 				.statusCode(200)
 				.extract()
 				.body()
-				.as(TokenVO.class)
-				.getAccessToken();
+				.as(TokenVO.class);
+
+		String token = accessToken.getAccessToken();
 
 		specification = new RequestSpecBuilder()
-				.addHeader(TestConfigs.HEADER_PARAM_AUTHORIZATION, "Bearer " + accessToken)
+				.addHeader(TestConfigs.HEADER_PARAM_AUTHORIZATION, "Bearer " + token)
 				.setBasePath("/api/person/v1")
 				.setPort(TestConfigs.SERVER_PORT)
 				.addFilter(new RequestLoggingFilter(LogDetail.ALL))
@@ -102,7 +103,7 @@ public class PersonControllerCorsJsonTest extends AbstractIntegrationTest {
 		assertEquals("Richard", persistedPerson.getFirstName());
 		assertEquals("Stallman", persistedPerson.getLastName());
 		assertEquals("New York City, New York, US", persistedPerson.getAddress());
-		assertEquals("Male", persistedPerson.getGender());
+		assertEquals("M", persistedPerson.getGender());
 	}
 
 	@Test
@@ -159,7 +160,7 @@ public class PersonControllerCorsJsonTest extends AbstractIntegrationTest {
 		assertEquals("Richard", persistedPerson.getFirstName());
 		assertEquals("Stallman", persistedPerson.getLastName());
 		assertEquals("New York City, New York, US", persistedPerson.getAddress());
-		assertEquals("Male", persistedPerson.getGender());
+		assertEquals("M", persistedPerson.getGender());
 	}
 
 
@@ -189,7 +190,7 @@ public class PersonControllerCorsJsonTest extends AbstractIntegrationTest {
 		person.setFirstName("Richard");
 		person.setLastName("Stallman");
 		person.setAddress("New York City, New York, US");
-		person.setGender("Male");
+		person.setGender("M");
 	}
 
 }
