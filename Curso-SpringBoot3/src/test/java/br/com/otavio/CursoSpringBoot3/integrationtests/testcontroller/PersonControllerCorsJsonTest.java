@@ -1,4 +1,4 @@
-package br.com.otavio.CursoSpringBoot3.integrationtests;
+package br.com.otavio.CursoSpringBoot3.integrationtests.testcontroller;
 
 
 import static io.restassured.RestAssured.given;
