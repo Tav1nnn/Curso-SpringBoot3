@@ -13,12 +13,11 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static io.restassured.RestAssured.given;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class AuthControllerJsonTest extends AbstractIntegrationTest {
+public class AuthControllerXmlTest extends AbstractIntegrationTest {
 
     private static TokenVO tokenVO;
 
@@ -30,7 +29,7 @@ public class AuthControllerJsonTest extends AbstractIntegrationTest {
             tokenVO = given()
                 .basePath("/auth/signin")
                 .port(TestConfigs.SERVER_PORT)
-                .contentType(TestConfigs.CONTENT_TYPE_JSON)
+                .contentType(TestConfigs.CONTENT_TYPE_XML)
                 .body(user)
                 .when()
                 .post()
@@ -54,7 +53,7 @@ public class AuthControllerJsonTest extends AbstractIntegrationTest {
         TokenVO newtokenVO = given()
                 .basePath("/auth/refresh")
                 .port(TestConfigs.SERVER_PORT)
-                .contentType(TestConfigs.CONTENT_TYPE_JSON)
+                .contentType(TestConfigs.CONTENT_TYPE_XML)
                 .pathParams("username", tokenVO.getUsername())
                 .header(TestConfigs.HEADER_PARAM_AUTHORIZATION, "Bearer " + tokenVO.getRefreshToken())
                 .when()

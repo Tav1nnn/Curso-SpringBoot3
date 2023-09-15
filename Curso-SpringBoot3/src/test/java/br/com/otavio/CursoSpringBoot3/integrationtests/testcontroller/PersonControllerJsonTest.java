@@ -1,11 +1,12 @@
 package br.com.otavio.CursoSpringBoot3.integrationtests.testcontroller;
 
 import br.com.otavio.CursoSpringBoot3.configs.TestConfigs;
-import br.com.otavio.CursoSpringBoot3.integrationtests.testcontainers.AbstractIntegrationTest;
 import br.com.otavio.CursoSpringBoot3.integrationtests.vo.AccountCredentialsVO;
+import br.com.otavio.CursoSpringBoot3.integrationtests.vo.PersonVO;
 import br.com.otavio.CursoSpringBoot3.integrationtests.vo.TokenVO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -14,20 +15,22 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static io.restassured.RestAssured.given;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class AuthControllerJsonTest extends AbstractIntegrationTest {
+public class PersonControllerJsonTest {
 
     private static TokenVO tokenVO;
+
+    private static ObjectMapper objectMapper;
+
+    private static PersonVO person;
 
     @Test
     @Order(1)
     public void testSignin() throws JsonMappingException, JsonProcessingException {
         AccountCredentialsVO user = new AccountCredentialsVO("leandro", "admin123");
 
-            tokenVO = given()
+        tokenVO = given()
                 .basePath("/auth/signin")
                 .port(TestConfigs.SERVER_PORT)
                 .contentType(TestConfigs.CONTENT_TYPE_JSON)
@@ -39,33 +42,6 @@ public class AuthControllerJsonTest extends AbstractIntegrationTest {
                 .extract()
                 .body()
                 .as(TokenVO.class);
+        }
 
-
-
-
-        assertNotNull(tokenVO.getAccessToken());
     }
-
-    @Test
-    @Order(2)
-    public void testRefresh() throws JsonMappingException, JsonProcessingException {
-        AccountCredentialsVO user = new AccountCredentialsVO("leandro", "admin123");
-
-        TokenVO newtokenVO = given()
-                .basePath("/auth/refresh")
-                .port(TestConfigs.SERVER_PORT)
-                .contentType(TestConfigs.CONTENT_TYPE_JSON)
-                .pathParams("username", tokenVO.getUsername())
-                .header(TestConfigs.HEADER_PARAM_AUTHORIZATION, "Bearer " + tokenVO.getRefreshToken())
-                .when()
-                .put("{username}")
-                .then()
-                .statusCode(200)
-                .extract()
-                .body()
-                .as(TokenVO.class);
-
-
-        assertNotNull(newtokenVO.getAccessToken());
-    }
-}
