@@ -32,10 +32,11 @@ public class Person implements Serializable {
     @Column(nullable = false, length = 1)
     private String gender;
 
+
     public Person() {
     }
 
-    public Person(Long id, String firstName, String lastname, String address, String gender) {
+    public Person(Long id, String firstName, String lastname, String address, String gender, Boolean enabled) {
         this.id = id;
         this.firstName = firstName;
         this.lastname = lastname;

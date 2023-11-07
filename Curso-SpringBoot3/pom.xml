@@ -11,7 +11,7 @@
 	</parent>
 	
 	<groupId>br.com.otavio</groupId>
-	<artifactId>Curso-SpringBoot3</artifactId>
+	<artifactId>curso-springboot3</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Curso-SpringBoot3</name>
 	<description>Demo project for Spring Boot</description>

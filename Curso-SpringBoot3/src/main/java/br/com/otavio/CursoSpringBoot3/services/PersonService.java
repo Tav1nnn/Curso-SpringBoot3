@@ -3,9 +3,13 @@ package br.com.otavio.CursoSpringBoot3.services;
 import java.util.List;
 import java.util.logging.Logger;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.otavio.CursoSpringBoot3.controllers.PersonController;
@@ -42,15 +46,17 @@ public class PersonService {
     	return vo;
     }
     
-    public List<PersonVO> findAll() {
+    public Page<PersonVO> findAll(Pageable pageable) {
     	
     	logger.info("Service: Fiding all persin!");
-    	
-    	var persons = DozerMapper.parseListObjects(repository.findAll(), PersonVO.class);
-    	
-    	persons.stream().forEach(p -> p.add(linkTo(methodOn(PersonController.class).findById(p.getKey())).withSelfRel()));
-    	
-    	return persons;
+
+		Page<Person> personPage = repository.findAll(pageable);
+
+		Page<PersonVO> personVOPage = personPage.map(p -> DozerMapper.parseObject(p, PersonVO.class));
+
+    	personVOPage.map(p -> p.add(linkTo(methodOn(PersonController.class).findById(p.getKey())).withSelfRel()));
+
+		return personVOPage;
     }
     
     public PersonVO create(PersonVO person) {
@@ -112,5 +118,6 @@ public class PersonService {
     	
     	repository.delete(entity);
     }
+
 
 }

@@ -26,19 +26,28 @@ public class PersonVO extends RepresentationModel<PersonVO> implements Serializa
     private String address;
     private String gender;
 
+    private Boolean enabled;
+
     public PersonVO() {
     	
     }
 
-    public PersonVO(Long key, String firstName, String lastname, String address, String gender) {
+    public PersonVO(Long key, String firstName, String lastname, String address, String gender, Boolean enabled) {
         this.key = key;
         this.firstName = firstName;
         this.lastname = lastname;
         this.address = address;
         this.gender = gender;
+        this.enabled = enabled;
     }
 
-    
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
 
     public Long getKey() {
 		return key;
