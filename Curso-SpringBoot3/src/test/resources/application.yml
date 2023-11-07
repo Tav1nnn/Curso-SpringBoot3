@@ -3,7 +3,7 @@ server:
 cors:
   originPatterns: http://localhost:3000,http://localhost:8080,https://otavio.com.br
 file:
-  upload-dir: /home/runner/work/curso-springboot3/UploadDir
+  upload-dir: /home/runner/work/UploadDir
 security:
   jwt:
     token:
